@@ -1,0 +1,18 @@
+<launch>
+    <group ns="ns1_313315">
+        <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+        <node pkg="my_best_controller" name="target_node" type="target.py"/>
+        <node pkg="my_best_controller" name="controller" type="lab2_controller.py">
+            <param name="reference_topic" value="/ns1_313315/target_topic"/>
+        </node>
+    </group>
+
+    <group ns="ns2_313315">
+        <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+        <node pkg="my_best_controller" name="controller" type="lab2_controller.py">
+            <param name="reference_topic" value="/turtle_pose_topic"/>
+        </node>
+    </group>
+
+    <node pkg="my_best_controller" name="turtle_pose_publisher" type="get_turtle_pose.py" />
+</launch>

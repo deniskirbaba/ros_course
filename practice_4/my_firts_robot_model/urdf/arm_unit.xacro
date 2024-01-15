@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="arm_unit" 
+                 params="number parent length radius color axis lower_limit upper_limit link_xyz joint_xyz">
+        <link name='arm_unit_${number}'>
+            <visual name='arm_unit${number}_visual'>
+                <origin xyz="${link_xyz}" rpy="0.0 0 0.0"/>
+                <geometry>
+                    <cylinder length="${length}" radius="${radius}"/>
+                </geometry>
+                <material name="${color}"/>
+            </visual>
+        </link>
+
+        <joint name="arm_unit_${number}_joint" type="revolute">
+            <origin xyz="${joint_xyz}" rpy="0.0 0.0 0.0"/>
+            <child link="arm_unit_${number}"/>
+            <parent link="${parent}"/>
+            <axis xyz="${axis}"/>
+            <limit lower="${lower_limit}" upper="${upper_limit}" effort="0" velocity="3.1415"/>
+        </joint>
+    </xacro:macro>
+</robot>

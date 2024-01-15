@@ -1,0 +1,1 @@
+before usage unzip the /home/denis/git/ros_course_2023/course_project/roscourse_project/models/project_2023 file

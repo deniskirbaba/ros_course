@@ -1,0 +1,13 @@
+Load the controllers:
+rosservice call /robot/controller_manager/load_controller "name: 'left_wheel_position_controller'"
+rosservice call /robot/controller_manager/load_controller "name: 'right_wheel_position_controller'"
+
+Start the controllers:
+rosservice call /robot/controller_manager/switch_controller "{start_controllers: ['left_wheel_position_controller','right_wheel_position_controller'], stop_controllers: [], strictness: 2}"
+
+Stop the controllers:
+rosservice call /robot/controller_manager/switch_controller "{start_controllers: [], stop_controllers: ['left_wheel_position_controller','right_wheel_position_controller'], strictness: 2}"
+
+Send example joint commands to them for testing:
+rostopic pub -1 /robot/left_wheel_position_controller/command std_msgs/Float64 "data: 1.5"
+rostopic pub -1 /rrbot/right_wheel_position_controller/command std_msgs/Float64 "data: 1.0"

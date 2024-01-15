@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find my_firts_robot_model)/urdf/materials.xacro" />
+    <xacro:include filename="$(find my_firts_robot_model)/urdf/wheel.xacro" />
+    <xacro:include filename="$(find my_firts_robot_model)/urdf/arm_unit.xacro" />
+    <xacro:include filename="$(find my_firts_robot_model)/urdf/sliding_unit.xacro" />
+    
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    
+    <link name='base_link'>
+        <visual name='base_visual'>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <box size="0.19 0.12 0.01" />
+            </geometry>
+            <material name="blue" />
+        </visual>
+    </link>
+
+    <xacro:wheel side="left" length="0.02" radius="0.03" link_xyz="0 -0.01 0" link_rpy="1.5708 0 0" joint_xyz="0 -0.06 0" joint_rpy="0 0 0" axis_xyz="0 1 0" />
+
+    <xacro:wheel side="right" length='0.02' radius='0.03' link_xyz='0 0.01 0' link_rpy='1.5708 0 0' joint_xyz='0 0.06 0' joint_rpy='0 0 0' axis_xyz='0 1 0' />
+
+    <xacro:arm_unit number='1' parent='base_link' length='0.09' radius='0.01' color='black' axis='0 1 0' lower_limit='-1.5708' upper_limit='1.5708' link_xyz='0 0 0.045' joint_xyz='0.005 0 0.005'/>
+    <xacro:arm_unit number='2' parent='arm_unit_1' length='0.09' radius='0.01' color='black' axis='0 1 0' lower_limit='-1.5708' upper_limit='1.5708' link_xyz='0 0 0.045' joint_xyz='0 0 0.09'/>
+
+    <xacro:sliding_unit number='1' parent='arm_unit_2' size='0.19 0.01 0.005' color='black' axis='1 0 0' lower_limit='0.095' upper_limit='-0.095' link_xyz='0 0 0.0025' link_rpy='0 0 0' joint_xyz='0 0 0.09' joint_rpy='0 0 0'/>
+
+</robot>

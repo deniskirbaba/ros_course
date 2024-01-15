@@ -1,0 +1,88 @@
+<?xml version='1.0'?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo reference="base">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="wheel_left">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="wheel_right">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <!-- <gazebo reference="arm_unit_1">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="arm_unit_2">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="arm_unit_3">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="sliding_unit_1">
+        <material>Gazebo/Grey</material>
+    </gazebo> -->
+
+    <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+            <legacyMode>false</legacyMode>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>30</updateRate>
+            <leftJoint>wheel_left_joint</leftJoint>
+            <rightJoint>wheel_right_joint</rightJoint>
+            <wheelSeparation>${base_width}</wheelSeparation>
+            <wheelDiameter>${2 * wheel_radius}</wheelDiameter>
+            <wheelTorque>20</wheelTorque>
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>base_link</robotBaseFrame>
+        </plugin>
+    </gazebo>
+
+     <!-- <gazebo reference="sensor">
+        <material>Gazebo/Black</material>
+        <sensor type="contact" name="camera1">
+        <plugin name="sensor_gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30</updateRate>
+          <bumperTopicName>bumper_sensor_1</bumperTopicName>
+          <frameName>world_name</frameName>
+        </plugin>
+      </sensor>
+    </gazebo> -->
+
+    <gazebo reference="sensor">
+     <material>Gazebo/Black</material>
+      <sensor type="camera" name="camera1">
+        <update_rate>30.0</update_rate>
+        <camera name="head">
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>600</width>
+            <height>400</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>diff_drive_robot/camera1</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera</frameName>
+          <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+</robot>

@@ -1,0 +1,8 @@
+mass: 5-20 kg
+robot sizes: <= 60x40x20 cm
+
+lidar fov: <= 140 degrees
+lidar range: <= 2 m
+
+The main coordinate frame for the robot will be called base_link (REP 105 - Coordinate Frames for Mobile Platforms)
+The orientation of this coordinate frame will be X-forward, Y-left, Z-up (REP 103 - Standard Units of Measure and Coordinate Conventions)

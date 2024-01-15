@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="sliding_unit" 
+                 params="number parent size color axis lower_limit upper_limit link_xyz link_rpy joint_xyz joint_rpy">
+        <link name='sliding_unit_${number}'>
+            <visual name='sliding_unit_${number}_visual'>
+                <origin xyz="${link_xyz}" rpy="${link_rpy}"/>
+                <geometry>
+                    <box size="${size}"/>
+                </geometry>
+                <material name="${color}"/>
+            </visual>
+        </link>
+
+        <joint name="sliding_unit_${number}_joint" type="prismatic">
+            <parent link="${parent}"/>
+            <child link="sliding_unit_${number}"/>
+            <axis xyz="${axis}"/>
+            <limit lower='${lower_limit}' upper='${upper_limit}' effort="0" velocity="1"/>
+            <origin xyz="${joint_xyz}" rpy="${joint_rpy}"/>
+        </joint>
+        
+    </xacro:macro>
+</robot>
